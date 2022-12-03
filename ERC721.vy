@@ -332,7 +332,7 @@ def setApprovalForAll(_operator: address, _approved: bool):
 ### MINT & BURN FUNCTIONS ###
 
 @external
-def mint(_to: address, _tokenId: uint256) -> bool:
+def mint(_to: address, _tokenId: uint256, _idToURI: String[256]) -> bool:
     """
     @dev Function to mint tokens
          Throws if `msg.sender` is not the minter.
