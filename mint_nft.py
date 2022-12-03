@@ -51,9 +51,9 @@ def deploy_nft(contract_file,name,symbol,minter_address):
 	#Return the contract object
 	return ERC721_contract
 
-project_id = '2FTtIoa5G1Q3oWsCYT0fmE8MHPq'
+project_id = '2IPL4whdR6Fai5Ljn81anNZbJCc'
 IPFS_API_endpoint = 'https://ipfs.infura.io:5001'
-project_secret = '2066e379d1f4119e39665ceaadc0eabb'
+project_secret = '4bf78a5e1c3598d85bf97f87ea0f4203'
 
 def mint_nft(nft_contract,tokenId,metadata,owner_address,minter_address):
 	"""
