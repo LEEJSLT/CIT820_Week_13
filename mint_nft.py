@@ -69,14 +69,17 @@ def mint_nft(nft_contract,tokenId,metadata,owner_address,minter_address):
 	#Step 1: pin Metadata to IPFS
 	
 	files = {
+
 		'file': json.dumps(metadata, indent=2)
 	}
 	response = requests.post('https://ipfs.infura.io:5001/api/v0/add',files=files, auth=(project_id, project_secret))
-	# response2 = response2.json()
-	# cid = response2["Hash"]
+
 	print(response.text)
 
-	cid = response.text.split(",")[1].split(":")[1].replace('"','')
+	# cid = response.text.split(",")[1].split(":")[1].replace('"','')
+	cid = response["Hash"]
+
+	# print(cid)
 
 	print(cid)
 
