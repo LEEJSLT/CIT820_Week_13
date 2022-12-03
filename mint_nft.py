@@ -70,9 +70,9 @@ def mint_nft(nft_contract,tokenId,metadata,owner_address,minter_address):
 	
 	files = {
 
-		'file': json.dumps(metadata, indent=2)
+		'file': json.dumps(metadata)
 	}
-	response = requests.post('https://ipfs.infura.io:5001/api/v0/add',files=files, auth=(project_id, project_secret))
+	response = requests.post('https://ipfs.infura.io:5001/api/v0/add', files=files, auth=(project_id, project_secret))
 	response = response.json()
 	cid = response["Hash"]
 
