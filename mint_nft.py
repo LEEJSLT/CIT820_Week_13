@@ -2,9 +2,9 @@ from web3 import Web3
 from vyper import compile_code, compile_codes
 from os import path
 from web3.providers.rpc import HTTPProvider
+
 import requests
 import json
-
 from vyper.interfaces import ERC721
 
 #For our tests, we'll use a local Ethereum testing environment.
@@ -51,6 +51,10 @@ def deploy_nft(contract_file,name,symbol,minter_address):
 	#Return the contract object
 	return ERC721_contract
 
+project_id = '2FTtIoa5G1Q3oWsCYT0fmE8MHPq'
+IPFS_API_endpoint = 'https://ipfs.infura.io:5001'
+project_secret = '2066e379d1f4119e39665ceaadc0eabb'
+
 def mint_nft(nft_contract,tokenId,metadata,owner_address,minter_address):
 	"""
 	nft_contract: a deployed contract
@@ -64,31 +68,10 @@ def mint_nft(nft_contract,tokenId,metadata,owner_address,minter_address):
 	#YOUR CODE HERE	
 	#Step 1: pin Metadata to IPFS
 	
-	abi = '''[
-	    {
-	      "constant": true,
-	      "inputs": [],
-	      "name": "owner",
-	      "outputs": [
-		{
-		  "name": "",
-		  "type": "address"
-		}
-	      ],
-	      "payable": false,
-	      "type": "function"
-	    },
-	    {
-	      "inputs": [],
-	      "payable": false,
-	      "type": "constructor"
-	    }
-	]'''
-
 	files = {
 		'file': json.dumps(metadata, indent=2)
 	}
-	response2 = requests.post('https://ipfs.infura.io:5001/api/v0/add', files=files) #, auth=(projectId, projectSecret))
+	response2 = requests.post('https://ipfs.infura.io:5001/api/v0/add',files=files, auth=(project_id, project_secret))
 	response2 = response2.json()
 	cid = response2["Hash"]
 
