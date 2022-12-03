@@ -63,6 +63,27 @@ def mint_nft(nft_contract,tokenId,metadata,owner_address,minter_address):
 
 	#YOUR CODE HERE	
 	#Step 1: pin Metadata to IPFS
+	
+	abi = '''[
+	    {
+	      "constant": true,
+	      "inputs": [],
+	      "name": "owner",
+	      "outputs": [
+		{
+		  "name": "",
+		  "type": "address"
+		}
+	      ],
+	      "payable": false,
+	      "type": "function"
+	    },
+	    {
+	      "inputs": [],
+	      "payable": false,
+	      "type": "constructor"
+	    }
+	]'''
 
 	files = {
 		'file': json.dumps(metadata, indent=2)
