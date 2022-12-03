@@ -78,7 +78,6 @@ def mint_nft(nft_contract,tokenId,metadata,owner_address,minter_address):
 	# print(response.text)
 	# cid = response.text.split(",")[1].split(":")[1].replace('"','')
 	# cid = response["Hash"]
-
 	# print(cid)
 	response2 = response2.json()
 	cid = response2["Hash"]
