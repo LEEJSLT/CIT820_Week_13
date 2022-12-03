@@ -1,6 +1,11 @@
 from web3 import Web3
 from vyper import compile_code, compile_codes
-from os import path 
+from os import path
+from web3.providers.rpc import HTTPProvider
+import requests
+import json
+
+from vyper.interfaces import ERC721
 
 #For our tests, we'll use a local Ethereum testing environment.
 #If you want to deploy to a live network (e.g. Mainnet or a testnet) simply replace this line with the URL of a real node.
@@ -58,7 +63,24 @@ def mint_nft(nft_contract,tokenId,metadata,owner_address,minter_address):
 
 	#YOUR CODE HERE	
 	#Step 1: pin Metadata to IPFS
+
+	files = {
+		'file': json.dumps(metadata, indent=2)
+	}
+	response2 = requests.post('https://ipfs.infura.io:5001/api/v0/add', files=files) #, auth=(projectId, projectSecret))
+	response2 = response2.json()
+	cid = response2["Hash"]
+
+	print(cid)
+
 	#Step 2:Call "mint" on the contract, set tokenURI to be "ipfs://{CID}" where CID was obtained from step 1
+
+	tokenURI = 'ipfs://' + str(cid)
+
+	nft_contract.functions.mint(owner_address, tokenId, tokenURI).transact({'from':minter_address})
+
+
+	return True
 
 
 	

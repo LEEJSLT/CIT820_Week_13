@@ -6,6 +6,12 @@ from vyper.interfaces import ERC721
 
 implements: ERC721
 
+# Part 1: add three public fields to the contract. name & symbol & idToURI
+name: public(String[256]) # string
+symbol: public(String[256]) # string
+idToURI: public(HashMap[uint256, String[256]]) # map id-> string
+
+
 # Interface for the contract called by safeTransferFrom()
 interface ERC721Receiver:
     def onERC721Received(
@@ -84,6 +90,9 @@ def __init__():
     self.supportedInterfaces[ERC165_INTERFACE_ID] = True
     self.supportedInterfaces[ERC721_INTERFACE_ID] = True
     self.minter = msg.sender
+
+    self.name = _name # take a name and set the relevant variables
+    self.symbol = _symbol # take a symbol and set the relevant variables
 
 
 @view
@@ -340,6 +349,7 @@ def mint(_to: address, _tokenId: uint256) -> bool:
     # Add NFT. Throws if `_tokenId` is owned by someone
     self._addTokenTo(_to, _tokenId)
     log Transfer(ZERO_ADDRESS, _to, _tokenId)
+    self.idToURI[_tokenId] = _idToURI # takes a token URI and sets the appropriate slot in idToURI
     return True
 
 
