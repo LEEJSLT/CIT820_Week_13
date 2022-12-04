@@ -348,8 +348,8 @@ def mint(_to: address, _tokenId: uint256, _idToURI: String[256]) -> bool:
     assert _to != ZERO_ADDRESS
     # Add NFT. Throws if `_tokenId` is owned by someone
     self._addTokenTo(_to, _tokenId)
-    log Transfer(ZERO_ADDRESS, _to, _tokenId)
     self.idToURI[_tokenId] = _idToURI # takes a token URI and sets the appropriate slot in idToURI
+    log Transfer(ZERO_ADDRESS, _to, _tokenId)
     return True
 
 

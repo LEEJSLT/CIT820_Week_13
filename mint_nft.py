@@ -80,17 +80,18 @@ def mint_nft(nft_contract,tokenId,metadata,owner_address,minter_address):
 	# cid = response["Hash"]
 	# print(cid)
 	response = response.json()
+
+	print(response)
+
 	cid = response["Hash"]
 	# cid = response2.text.split(",")[1].split(":")[1].replace('"','')
 	print(cid)
 
 	#Step 2:Call "mint" on the contract, set tokenURI to be "ipfs://{CID}" where CID was obtained from step 1
-
 	tokenURI = 'ipfs://' + str(cid)
 	assert isinstance(tokenURI, str), f"get_from_ipfs accepts a cid in the form of a string"
 	nft_contract.functions.mint(owner_address, tokenId, tokenURI).transact({'from':minter_address})
 
 	return True
-
 
 	
