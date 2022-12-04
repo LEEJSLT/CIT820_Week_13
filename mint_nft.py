@@ -13,6 +13,9 @@ import json
 #w3.eth.accounts[1]
 #etc
 w3 = Web3(Web3.EthereumTesterProvider())
+project_id = '2IPL4whdR6Fai5Ljn81anNZbJCc'
+IPFS_API_endpoint = 'https://ipfs.infura.io:5001'
+project_secret = '4bf78a5e1c3598d85bf97f87ea0f4203'
 
 def deploy_nft(contract_file,name,symbol,minter_address):
 	"""
@@ -50,9 +53,7 @@ def deploy_nft(contract_file,name,symbol,minter_address):
 	#Return the contract object
 	return ERC721_contract
 
-project_id = '2IPL4whdR6Fai5Ljn81anNZbJCc'
-IPFS_API_endpoint = 'https://ipfs.infura.io:5001'
-project_secret = '4bf78a5e1c3598d85bf97f87ea0f4203'
+
 
 def mint_nft(nft_contract,tokenId,metadata,owner_address,minter_address):
 	"""
@@ -71,7 +72,7 @@ def mint_nft(nft_contract,tokenId,metadata,owner_address,minter_address):
 
 		'file': json.dumps(metadata)
 	}
-	response = requests.post('https://ipfs.infura.io:5001/api/v0/add', files=files)#, auth=(project_id, project_secret))
+	response = requests.post('https://ipfs.infura.io:5001/api/v0/add', files=files, auth=(project_id, project_secret))
 	# response = response.json()
 	# cid = response["Hash"]
 	# print(response.text)
